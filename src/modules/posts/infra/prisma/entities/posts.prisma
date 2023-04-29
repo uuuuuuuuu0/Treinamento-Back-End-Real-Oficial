@@ -1,0 +1,22 @@
+model Post {
+  id              String     @id @default(uuid())
+  photoUrl        String
+  content         String
+  user            Users       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId          String
+  // userId informacao chave de relaciomento
+  likes_recebidos PostLike[]
+
+  @@map("posts")
+}
+
+model Users {
+  id          String     @id @default(uuid())
+  posts       Post[]
+}
+
+model PostLike {
+  id     String  @id @default(uuid())
+  post   Post    @relation(fields: [piuId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  piuId  String
+}

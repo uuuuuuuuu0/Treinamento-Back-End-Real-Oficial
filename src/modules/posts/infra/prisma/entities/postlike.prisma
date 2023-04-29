@@ -1,0 +1,20 @@
+model PostLike {
+  id     String @id @default(uuid())
+  user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+  post   Post   @relation(fields: [piuId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  piuId  String
+
+  @@unique(fields: [userId, piuId], name: "likeId") // um usuario nao consegue dar mais de um like!!
+  @@map("likes")
+}
+
+model Users {
+  id          String     @id @default(uuid())
+  likes_dados PostLike[]
+}
+
+model Post {
+  id              String     @id @default(uuid())
+  likes_recebidos PostLike[]
+}

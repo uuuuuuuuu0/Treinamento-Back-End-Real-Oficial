@@ -1,0 +1,9 @@
+model Books {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  author     String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("books")
+}
